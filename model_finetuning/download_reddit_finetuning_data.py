@@ -24,9 +24,11 @@ config.read('dataset.ini')
 http = requests.Session()
 
 verbose = False
-
-if config['DEFAULT']['verbose']:
-	verbose = config['DEFAULT'].getboolean('verbose')
+try: 
+	if config['DEFAULT']['verbose']:
+		verbose = config['DEFAULT'].getboolean('verbose')
+except KeyError:
+	print("You likely have your dataset file named improperly. Please make sure the name matches the filename on line 21.")
 
 
 def loop_between_dates(start_datetime, end_datetime):
